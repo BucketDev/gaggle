@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: profile
+
+  datasource:
+    url: jdbc:postgresql://localhost/gl-profile
+    username: postgres
+    password: Rloyola.01
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamignStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+  logging:
+    config: src/main/resources/log4j2.yml
+server:
+  port: 8081

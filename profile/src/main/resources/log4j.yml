@@ -1,0 +1,39 @@
+Configuration:
+  properties:
+    - property:
+        name: gaggleURI
+        value: "log\gaggle.log"
+    - property:
+        name: gagglePattern
+        value: "log\gaggle-%d{dd-MM-yyyy}-%i.log.gz"
+  appenders:
+    Console:
+      name: STDOUT
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: "%d %p -%c{2} [%C @ %L] %m%n"
+    RollingFile:
+      name: gaggleAppender
+      fileName: ${gaggleURI}
+      filePattern: ${gagglePattern}
+      PatternLayout:
+        Pattern: "%d %p [%C @ %L] %m%n"
+      Filters:
+        ThresholdFilter:
+          level: warning
+      Policies:
+        TimeBasedTriggeringPolicy:
+          interval: 1
+          modulate: true
+        SizeBasedTriggeringPolicy:
+          size: "1 KB"
+  Loggers:
+    logger:
+      name: gaggleLogger
+      level: WARN
+      AppenderRef:
+        ref: gaggleAppender
+    Root:
+      level: INFO
+      AppenderRef:
+        ref: STDOUT
